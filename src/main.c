@@ -10,7 +10,7 @@
  *   Elias Peltokorpi (2 points)
  *   Eemil Holma (1 point)
  * 
- * Friend A: Input Task
+ * Elias: Input Task
  * - Implemented IMU tilt detection for dot/dash.
  * - Coded button press logic.
  * - Tested motion recognition.
@@ -79,7 +79,7 @@ static inline uint32_t now_ms(void) {
     return to_ms_since_boot(get_absolute_time());
 }
 
-// status_task: simple status task, prints once per second
+// status_task: simple status task, prints running every 30 seconds.
 
 static void status_task(void *arg) {
     (void)arg;
@@ -155,7 +155,7 @@ static void input_task(void *arg)
     while (1) {
         uint32_t now = now_ms();
 
-        // ---- 1) Read IMU and detect tilt for dot/dash ----
+        // Read IMU and detect tilt for dot/dash
         if (ICM42670_read_sensor_data(&ax, &ay, &az, &gx, &gy, &gz, &t) == 0) {
             // Calculate total acceleration magnitude (normalize to 1g)
             float amag = sqrtf(ax * ax + ay * ay + az * az);
